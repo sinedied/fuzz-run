@@ -6,6 +6,7 @@ const chalk = require('chalk');
 
 const appName = path.basename(process.argv[1]);
 const help = chalk`{bold Usage:} ${appName} {green <fuzzy_script_name>}\n`;
+const chalkTemplate = str => chalk(Object.assign([], {raw: [str]}));
 
 function fuzzyRun(args, runner = null) {
   try {
@@ -22,12 +23,14 @@ function fuzzyRun(args, runner = null) {
     runner = runner || getPackageManager(path.dirname(packageFile));
 
     if (!scripts[name]) {
-      scriptName = matchScript(name, Object.keys(scripts));
-      if (!scriptName) {
+      const match = matchScript(name, Object.keys(scripts));
+      if (!match) {
         console.error(chalk`No script match for {yellow ${name}}\n`);
         showScripts(scripts);
       }
-      console.log(chalk`Running {green ${scriptName}}`);
+      const highlightedName = fuzzysort.highlight(match, '{underline ', '}');
+      console.log(chalkTemplate(`Running {green ${highlightedName}}`));
+      scriptName = match.target;
     }
 
     spawn.sync(
@@ -80,7 +83,7 @@ function getPackageManager(packageDir) {
 
 function matchScript(str, scriptNames) {
   const match = fuzzysort.go(str, scriptNames, {limit: 1, allowTypo: true})[0];
-  return match ? match.target : null;
+  return match || null;
 }
 
 function showScripts(scripts) {
