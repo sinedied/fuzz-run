@@ -13,6 +13,12 @@
 - Yarn support: if a `yarn.lock` file is found, `yarn <script>` will be used instead of `npm run <script>`
 - No need for `--` to pass extra options when using NPM
 
+## Installation
+
+```sh
+npm install -g fuzz-run
+```
+
 ## CLI Usage
 
 ```sh
