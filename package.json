@@ -9,7 +9,8 @@
     "nr": "./bin/fr"
   },
   "scripts": {
-    "test": "xo"
+    "test": "xo",
+    "postpublish": "git tag -a $npm_package_version -m \"$npm_package_version\" && git push --tags"
   },
   "keywords": [
     "npm",
