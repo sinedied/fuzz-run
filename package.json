@@ -1,0 +1,46 @@
+{
+  "name": "fuzz-run",
+  "version": "1.0.0",
+  "description": "Run all your NPM scripts faster with fuzzy matching",
+  "repository": "sinedied/fuzz-run",
+  "main": "index.js",
+  "bin": {
+    "fr": "./bin/fr",
+    "nr": "./bin/fr"
+  },
+  "scripts": {
+    "test": "xo"
+  },
+  "keywords": [
+    "npm",
+    "run",
+    "runner",
+    "scripts",
+    "yarn",
+    "fuzzy",
+    "fuzz",
+    "cli"
+  ],
+  "author": "Yohan Lasorsa",
+  "license": "MIT",
+  "homepage": "https://github.com/sinedied/fuzz-run",
+  "bugs": {
+    "url": "https://github.com/sinedied/fuzz-run/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "cross-spawn": "^6.0.5",
+    "fuzzysort": "^1.1.4",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "space": true,
+    "prettier": true
+  }
+}
