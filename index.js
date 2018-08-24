@@ -72,7 +72,7 @@ function findPackageFile(basePath) {
 function getScripts(packageFile) {
   const projectPackage = packageFile ? require(packageFile) : null;
   if (!projectPackage) {
-    throw new Error(chalk`Error, {yello package.json} not found\n`);
+    throw new Error(chalk`Error, {yellow package.json} not found\n`);
   }
   return projectPackage.scripts || [];
 }

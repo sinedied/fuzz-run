@@ -38,7 +38,7 @@
     "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "xo": "^0.21.1"
+    "xo": "^0.22.0"
   },
   "xo": {
     "space": true,
