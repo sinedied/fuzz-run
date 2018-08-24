@@ -1,6 +1,6 @@
 {
   "name": "fuzz-run",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Run all your NPM scripts faster with fuzzy matching",
   "repository": "sinedied/fuzz-run",
   "main": "index.js",
