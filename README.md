@@ -3,6 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/fuzz-run.svg)](https://www.npmjs.com/package/fuzz-run)
 [![Build status](https://img.shields.io/travis/sinedied/fuzz-run/master.svg)](https://travis-ci.org/sinedied/fuzz-run)
 ![Node version](https://img.shields.io/node/v/fuzz-run.svg)
+[![Install size](https://packagephobia.now.sh/badge?p=fuzz-run)](https://packagephobia.now.sh/result?p=fuzz-run)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
