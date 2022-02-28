@@ -43,8 +43,7 @@
   "dependencies": {
     "chalk-template": "^0.3.1",
     "cross-spawn": "^7.0.3",
-    "fuzzysort": "^1.1.4",
-    "minimist": "^1.2.0"
+    "fuzzysort": "^1.1.4"
   },
   "devDependencies": {
     "semantic-release": "^19.0.2",
