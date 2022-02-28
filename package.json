@@ -2,11 +2,15 @@
   "name": "fuzz-run",
   "version": "1.0.2",
   "description": "Run all your NPM scripts faster with fuzzy matching",
-  "repository": "sinedied/fuzz-run",
-  "main": "index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinedied/fuzz-run.git"
+  },
+  "exports": "./index.js",
   "bin": {
-    "fr": "./bin/fr",
-    "nr": "./bin/fr"
+    "fr": "./bin/fr.js",
+    "nr": "./bin/fr.js"
   },
   "scripts": {
     "test": "xo",
@@ -20,25 +24,33 @@
     "yarn",
     "fuzzy",
     "fuzz",
-    "cli"
+    "cli",
+    "helper"
   ],
-  "author": "Yohan Lasorsa",
+  "author": {
+    "name": "Yohan Lasorsa",
+    "url": "https://twitter.com/sinedied"
+  },
   "license": "MIT",
   "homepage": "https://github.com/sinedied/fuzz-run",
   "bugs": {
     "url": "https://github.com/sinedied/fuzz-run/issues"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=12.20.0"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "cross-spawn": "^6.0.5",
+    "chalk-template": "^0.3.1",
+    "cross-spawn": "^7.0.3",
     "fuzzysort": "^1.1.4",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "xo": "^0.22.0"
+    "xo": "^0.48.0"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "bracketSpacing": true
   },
   "xo": {
     "space": true,
