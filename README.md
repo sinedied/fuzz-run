@@ -1,13 +1,13 @@
 # :runner: fuzz-run
 
 [![NPM version](https://img.shields.io/npm/v/fuzz-run.svg)](https://www.npmjs.com/package/fuzz-run)
-[![Build status](https://img.shields.io/travis/sinedied/fuzz-run/master.svg)](https://travis-ci.org/sinedied/fuzz-run)
+[![Build Status](https://github.com/sinedied/fuzz-run/workflows/ci/badge.svg)](https://github.com/sinedied/fuzz-run/actions)
 ![Node version](https://img.shields.io/node/v/fuzz-run.svg)
 [![Install size](https://packagephobia.now.sh/badge?p=fuzz-run)](https://packagephobia.now.sh/result?p=fuzz-run)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> Run all your NPM scripts faster with fuzzy matching
+> Run all your NPM scripts more easily with fuzzy matching.
 
 **Features:**
 - Fuzzy matching of NPM script name, optimized for commands (see [alternatives](#alternatives))
@@ -26,7 +26,7 @@ npm install -g fuzz-run
 fr <fuzzy_script_name>
 ```
 
-If no arguments is provided, it will list all available scripts.
+If no arguments are provided, it will list all available scripts.
 
 As the name of the script to run is fuzzy matched, you can try:
 - typing only some letters of the script name, regardless of their position (first letters weights more), like `t` for `test` script
