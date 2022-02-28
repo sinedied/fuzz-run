@@ -43,5 +43,9 @@
   "xo": {
     "space": true,
     "prettier": true
-  }
+  },
+  "files": [
+    "bin",
+    "index.js"
+  ]
 }
