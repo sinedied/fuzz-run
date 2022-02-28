@@ -1,7 +1,7 @@
 {
   "name": "fuzz-run",
   "version": "1.0.2",
-  "description": "Run all your NPM scripts faster with fuzzy matching",
+  "description": "Run all your NPM scripts more easily with fuzzy matching",
   "type": "module",
   "repository": {
     "type": "git",
@@ -13,8 +13,9 @@
     "nr": "./bin/fr.js"
   },
   "scripts": {
-    "test": "xo",
-    "postpublish": "git tag -a $npm_package_version -m \"$npm_package_version\" && git push --tags"
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "xo"
   },
   "keywords": [
     "npm",
@@ -46,6 +47,8 @@
     "minimist": "^1.2.0"
   },
   "devDependencies": {
+    "semantic-release": "^19.0.2",
+    "semantic-release-npm-github": "^3.0.0",
     "xo": "^0.48.0"
   },
   "prettier": {
