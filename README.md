@@ -1,7 +1,7 @@
 # :runner: fuzz-run
 
 [![NPM version](https://img.shields.io/npm/v/fuzz-run.svg)](https://www.npmjs.com/package/fuzz-run)
-[![Build Status](https://github.com/sinedied/fuzz-run/workflows/ci/badge.svg)](https://github.com/sinedied/fuzz-run/actions)
+[![Build Status](https://github.com/sinedied/fuzz-run/workflows/build/badge.svg)](https://github.com/sinedied/fuzz-run/actions)
 ![Node version](https://img.shields.io/node/v/fuzz-run.svg)
 [![Install size](https://packagephobia.now.sh/badge?p=fuzz-run)](https://packagephobia.now.sh/result?p=fuzz-run)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
