@@ -48,6 +48,14 @@ There are a few scripted actions you can use for common day-to-day tasks in your
 - `-u` or `--update`: It will check for outdated packages and run an interactive update, using under the hood `npx npm-check -u` if NPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
 - `-r` or `--refresh`: It will delete `node_modules` folder and lockfile, and reinstall all your packages. I probably use that more than I should, but it's always a handy fix.
 
+### Package manager
+
+Supported package managers are NPM and Yarn.
+
+By default, your package manager will be autodetected based on your project's lockfile format, and corresponding commands will be used.
+
+You can also force a package manager by setting the `NODE_PACKAGE_MANAGER` environment variable.
+
 ## API
 
 You can also integrate this script runner in your own CLI by using the function `fuzzyRun(args, packageManager)`:

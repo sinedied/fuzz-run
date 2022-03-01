@@ -109,8 +109,20 @@ function getScripts(packageFile) {
 }
 
 function getPackageManager(packageDir) {
-  // TODO: add process.env support NODE_PACKAGE_MANAGER
-  return fs.existsSync(path.join(packageDir, 'yarn.lock')) ? 'yarn' : 'npm';
+  let packageManager = process.env.NODE_PACKAGE_MANAGER;
+  if (packageManager && packageManager !== 'npm' && packageManager !== 'yarn') {
+    throw new Error(
+      chalk`{yellow Unsupported package manager: ${packageManager}}\n`
+    );
+  }
+
+  if (!packageManager) {
+    packageManager = fs.existsSync(path.join(packageDir, 'yarn.lock'))
+      ? 'yarn'
+      : 'npm';
+  }
+
+  return packageManager;
 }
 
 function matchScript(string_, scriptNames) {
