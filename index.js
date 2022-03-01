@@ -123,7 +123,7 @@ function getPackageManager(packageDir) {
     const hasNpmLock = fs.existsSync(path.join(packageDir, npmLockFile));
     const hasYarnLock = fs.existsSync(path.join(packageDir, yarnLockFile));
     const hasPnpmLock = fs.existsSync(path.join(packageDir, pnpmLockFile));
-  
+
     if (hasPnpmLock && !hasNpmLock && !hasYarnLock) {
       packageManager = 'pnpm';
     } else if (hasYarnLock && !hasNpmLock) {
@@ -167,6 +167,7 @@ function updatePackages(packageManager) {
     if (packageManager === 'pnpm') {
       process.env.NPM_CHECK_INSTALLER = 'pnpm';
     }
+
     spawn.sync('npx', ['-y', 'npm-check', '-u'], { stdio: 'inherit' });
   }
 }
@@ -188,6 +189,7 @@ function refreshPackages(packageManager, packageDir) {
   } else if (packageManager === 'pnpm') {
     lockFile = pnpmLockFile;
   }
+
   lockFile = path.join(packageDir, lockFile);
 
   if (fs.existsSync(lockFile)) {
@@ -198,5 +200,6 @@ function refreshPackages(packageManager, packageDir) {
       fs.unlinkSync(lockFile);
     }
   }
+
   spawn.sync(packageManager, ['install'], { stdio: 'inherit' });
 }
