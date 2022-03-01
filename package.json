@@ -15,7 +15,8 @@
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "xo"
+    "test": "xo",
+    "release:check": "semantic-release --dry-run"
   },
   "keywords": [
     "npm",
@@ -57,6 +58,10 @@
   "xo": {
     "space": true,
     "prettier": true
+  },
+  "release": {
+    "extends": "semantic-release-npm-github",
+    "branches": "main"
   },
   "files": [
     "bin",
