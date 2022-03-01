@@ -13,6 +13,7 @@
 - Fuzzy matching of NPM script name, optimized for commands (see [alternatives](#alternatives))
 - Yarn support: if a `yarn.lock` file is found, `yarn <script>` will be used instead of `npm run <script>`
 - No need for `--` to pass extra options when using NPM
+- Extra actions for common recurrent tasks
 
 ## Installation
 
@@ -23,7 +24,10 @@ npm install -g fuzz-run
 ## CLI Usage
 
 ```sh
-fr <fuzzy_script_name>
+Usage: fr <fuzzy_script_name>|<action> [script_options]
+Actions:
+  -u, --update   Check outdated packages and run an interactive update
+  -r, --refresh  Delete node_modules and lockfile, and reinstall packages
 ```
 
 If no arguments are provided, it will list all available scripts.
@@ -35,12 +39,21 @@ As the name of the script to run is fuzzy matched, you can try:
 
 Note that you can use the alias `nr` (for **n**pm **r**un) instead of `fr` (**f**uzz **r**un) if you prefer :wink:
 
+You can pass any arguments to your script if needed, like `fr t --coverage`. You don't need to use `--` to pass extra options to your script like when using `npm` directly.
+
+### Actions
+
+There are a few scripted actions you can use for common day-to-day tasks in your projects:
+
+- `-u` or `--update`: It will check for outdated packages and run an interactive update, using under the hood `npx npm-check -u` if NPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
+- `-r` or `--refresh`: It will delete `node_modules` folder and lockfile, and reinstall all your packages. I probably use that more than I should, but it's always a handy fix.
+
 ## API
 
-You can also integrate this script runner in your own CLI by using the function `fuzzyRun(args, runner)`:
+You can also integrate this script runner in your own CLI by using the function `fuzzyRun(args, packageManager)`:
 
 - `args`: array of arguments, the same you would use for the CLI usage
-- `runner`: *optional*, can be 'npm' or 'yarn' to force a specific command to run the scripts. If `null` or `undefined`, it will be autodetected based on the presence of the `yarn.lock` file.
+- `packageManager`: *optional*, can be 'npm' or 'yarn' to force a specific command to run the scripts. If `null` or `undefined`, it will be autodetected based on the presence of the `yarn.lock` file.
 
 Example:
 ```js
