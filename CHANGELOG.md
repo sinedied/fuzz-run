@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/sinedied/fuzz-run/compare/2.0.0...2.1.0) (2022-03-01)
+
+
+### Features
+
+* improve update process ([f1ee219](https://github.com/sinedied/fuzz-run/commit/f1ee2199a1e2820c70ae4b3b0e03dd167958901d))
+
 # [2.0.0](https://github.com/sinedied/fuzz-run/compare/1.0.1...2.0.0) (2022-03-01)
 
 
