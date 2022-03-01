@@ -11,7 +11,7 @@
 
 **Features:**
 - Fuzzy matching of NPM script name, optimized for commands (see [alternatives](#alternatives))
-- Yarn support: if a `yarn.lock` file is found, `yarn <script>` will be used instead of `npm run <script>`
+- Yarn and PNPM support: automatically detect the package manager used and adapt commands accordingly
 - No need for `--` to pass extra options when using NPM
 - Extra actions for common recurrent tasks
 
@@ -45,12 +45,12 @@ You can pass any arguments to your script if needed, like `fr t --coverage`. You
 
 There are a few scripted actions you can use for common day-to-day tasks in your projects:
 
-- `-u` or `--update`: It will check for outdated packages and run an interactive update, using under the hood `npx npm-check -u` if NPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
+- `-u` or `--update`: It will check for outdated packages and run an interactive update, using under the hood `npx npm-check -u` if NPM or PNPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
 - `-r` or `--refresh`: It will delete `node_modules` folder and lockfile, and reinstall all your packages. I probably use that more than I should, but it's always a handy fix.
 
 ### Package manager
 
-Supported package managers are NPM and Yarn.
+Supported package managers are NPM, [Yarn](https://yarnpkg.com) and [PNPM](https://pnpm.io).
 
 By default, your package manager will be autodetected based on your project's lockfile format, and corresponding commands will be used.
 
@@ -61,7 +61,7 @@ You can also force a package manager by setting the `NODE_PACKAGE_MANAGER` envir
 You can also integrate this script runner in your own CLI by using the function `fuzzyRun(args, packageManager)`:
 
 - `args`: array of arguments, the same you would use for the CLI usage
-- `packageManager`: *optional*, can be 'npm' or 'yarn' to force a specific command to run the scripts. If `null` or `undefined`, it will be autodetected based on the presence of the `yarn.lock` file.
+- `packageManager`: *optional*, can be `'npm'`, `'yarn'` or `'pnpm'` to force a specific command to run the scripts. If `null` or `undefined`, it will be autodetected based on your project's lockfile format.
 
 Example:
 ```js

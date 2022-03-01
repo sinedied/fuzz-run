@@ -13,6 +13,9 @@ const help = chalk`{bold Usage:} ${appName} {green <fuzzy_script_name>}|{cyan <a
   {cyan -u, --update}   Check outdated packages and run an interactive update
   {cyan -r, --refresh}  Delete node_modules and lockfile, and reinstall packages
 `;
+const npmLockFile = 'package-lock.json';
+const yarnLockFile = 'yarn.lock';
+const pnpmLockFile = 'pnpm-lock.yaml';
 const chalkTemplate = (string_) => chalk(Object.assign([], { raw: [string_] }));
 
 export function fuzzyRun(args, packageManager = null) {
@@ -117,9 +120,17 @@ function getPackageManager(packageDir) {
   }
 
   if (!packageManager) {
-    packageManager = fs.existsSync(path.join(packageDir, 'yarn.lock'))
-      ? 'yarn'
-      : 'npm';
+    const hasNpmLock = fs.existsSync(path.join(packageDir, npmLockFile));
+    const hasYarnLock = fs.existsSync(path.join(packageDir, yarnLockFile));
+    const hasPnpmLock = fs.existsSync(path.join(packageDir, pnpmLockFile));
+  
+    if (hasPnpmLock && !hasNpmLock && !hasYarnLock) {
+      packageManager = 'pnpm';
+    } else if (hasYarnLock && !hasNpmLock) {
+      packageManager = 'yarn';
+    } else {
+      packageManager = 'npm';
+    }
   }
 
   return packageManager;
@@ -153,18 +164,39 @@ function updatePackages(packageManager) {
       stdio: 'inherit'
     });
   } else {
+    if (packageManager === 'pnpm') {
+      process.env.NPM_CHECK_INSTALLER = 'pnpm';
+    }
     spawn.sync('npx', ['-y', 'npm-check', '-u'], { stdio: 'inherit' });
   }
 }
 
 function refreshPackages(packageManager, packageDir) {
-  fs.rmSync(path.join(packageDir, 'node_modules'), { recursive: true });
-
-  if (packageManager === 'yarn') {
-    fs.rm(path.join(packageDir, 'yarn.lock'), { force: true });
-  } else {
-    fs.rm(path.join(packageDir, 'package-lock.json'), { force: true });
+  const nodeModulesDir = path.join(packageDir, 'node_modules');
+  if (fs.existsSync(nodeModulesDir)) {
+    if (fs.rmSync) {
+      fs.rmSync(nodeModulesDir, { recursive: true });
+    } else {
+      // Compatibility Node.js < 14
+      fs.rmdirSync(nodeModulesDir, { recursive: true });
+    }
   }
 
+  let lockFile = npmLockFile;
+  if (packageManager === 'yarn') {
+    lockFile = yarnLockFile;
+  } else if (packageManager === 'pnpm') {
+    lockFile = pnpmLockFile;
+  }
+  lockFile = path.join(packageDir, lockFile);
+
+  if (fs.existsSync(lockFile)) {
+    if (fs.rmSync) {
+      fs.rmSync(lockFile);
+    } else {
+      // Compatibility Node.js < 14
+      fs.unlinkSync(lockFile);
+    }
+  }
   spawn.sync(packageManager, ['install'], { stdio: 'inherit' });
 }
