@@ -9,6 +9,8 @@
 
 > Run all your NPM scripts more easily with fuzzy matching.
 
+![demo gif](https://user-images.githubusercontent.com/593151/156170977-c9cfa19f-40a2-40b5-8c17-23180fbbc79a.gif)
+
 **Features:**
 - Fuzzy matching of NPM script name, optimized for commands (see [alternatives](#alternatives))
 - Yarn and PNPM support: automatically detect the package manager used and adapt commands accordingly
