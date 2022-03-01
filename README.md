@@ -28,7 +28,7 @@ npm install -g fuzz-run
 ```sh
 Usage: fr <fuzzy_script_name>|<action> [script_options]
 Actions:
-  -u, --update   Check outdated packages and run an interactive update
+  -u, --update   Show outdated packages and run an interactive update
   -r, --refresh  Delete node_modules and lockfile, and reinstall packages
 ```
 
@@ -47,12 +47,12 @@ You can pass any arguments to your script if needed, like `fr t --coverage`. You
 
 There are a few scripted actions you can use for common day-to-day tasks in your projects:
 
-- `-u` or `--update`: It will check for outdated packages and run an interactive update, using under the hood `npx npm-check -u` if NPM or PNPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
+- `-u` or `--update`: It will show outdated packages, then ask if you want to update. If you accept, it will first update all package within their allowed range according to your `package.json` using `npm update`, `pnpm update` or `yarn upgrade`. Then it will run an interactive update, using under the hood `npx npm-check -u` if NPM or PNPM is your package manager or `yarn upgrade-interactive` if you use Yarn.
 - `-r` or `--refresh`: It will delete `node_modules` folder and lockfile, and reinstall all your packages. I probably use that more than I should, but it's always a handy fix.
 
 ### Package manager
 
-Supported package managers are NPM, [Yarn](https://yarnpkg.com) and [PNPM](https://pnpm.io).
+Supported package managers are [NPM](https://www.npmjs.com), [Yarn](https://yarnpkg.com) and [PNPM](https://pnpm.io).
 
 By default, your package manager will be autodetected based on your project's lockfile format, and corresponding commands will be used.
 

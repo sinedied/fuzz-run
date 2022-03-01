@@ -2,6 +2,7 @@ import path from 'node:path';
 import process from 'node:process';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { createInterface } from 'node:readline';
 import spawn from 'cross-spawn';
 import fuzzysort from 'fuzzysort';
 import chalk from 'chalk-template';
@@ -10,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appName = path.basename(process.argv[1]);
 const help = chalk`{bold Usage:} ${appName} {green <fuzzy_script_name>}|{cyan <action>} [script_options]
 {bold Actions:}
-  {cyan -u, --update}   Check outdated packages and run an interactive update
+  {cyan -u, --update}   Show outdated packages and run an interactive update
   {cyan -r, --refresh}  Delete node_modules and lockfile, and reinstall packages
 `;
 const npmLockFile = 'package-lock.json';
@@ -18,7 +19,7 @@ const yarnLockFile = 'yarn.lock';
 const pnpmLockFile = 'pnpm-lock.yaml';
 const chalkTemplate = (string_) => chalk(Object.assign([], { raw: [string_] }));
 
-export function fuzzyRun(args, packageManager = null) {
+export async function fuzzyRun(args, packageManager = null) {
   try {
     const packageFile = findPackageFile(process.cwd());
     if (!packageFile) {
@@ -158,7 +159,39 @@ function showScripts(scripts) {
   );
 }
 
-function updatePackages(packageManager) {
+async function askForInput(question) {
+  return new Promise((resolve, _reject) => {
+    const read = createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    read.question(question, (answer) => {
+      read.close();
+      resolve(answer);
+    });
+  });
+}
+
+async function updatePackages(packageManager) {
+  const { status } = spawn.sync(packageManager, ['outdated'], {
+    stdio: 'inherit'
+  });
+  if (status === 0) {
+    console.log(`Nothing to update.\n`);
+    return;
+  }
+
+  const answer = await askForInput(`\nDo you want to update now? [Y/n] `);
+  if (answer !== '' && answer.toLowerCase() !== 'y') {
+    return;
+  }
+
+  spawn.sync(
+    packageManager,
+    [packageManager === 'yarn' ? 'upgrade' : 'update'],
+    { stdio: 'inherit' }
+  );
+
   if (packageManager === 'yarn') {
     spawn.sync('yarn', ['upgrade-interactive', '--latest'], {
       stdio: 'inherit'
