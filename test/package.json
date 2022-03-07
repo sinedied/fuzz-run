@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"test script\""
+  },
+  "dependencies": {
+    "fuzz-run": "^2.1.0"
+  }
+}
