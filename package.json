@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "xo",
+    "test": "xo && cd test && npm ci && nr t && nr -r && cd subdir && nr t",
     "release:check": "semantic-release --dry-run"
   },
   "keywords": [
