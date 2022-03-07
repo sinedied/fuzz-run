@@ -30,7 +30,7 @@ jobs:
 
     - name: npm install and test
       run: |
-        npm i -g npm@latest
+        npm i -g npm@7
         npm ci
         npm link .
         npm test
