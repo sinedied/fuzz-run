@@ -207,6 +207,8 @@ async function updatePackages(packageManager) {
 
 function refreshPackages(packageManager, packageDir) {
   const nodeModulesDir = path.join(packageDir, 'node_modules');
+  console.log(chalk`Removing {green node_modules}...`);
+
   if (fs.existsSync(nodeModulesDir)) {
     if (fs.rmSync) {
       fs.rmSync(nodeModulesDir, { recursive: true });
@@ -223,6 +225,7 @@ function refreshPackages(packageManager, packageDir) {
     lockFile = pnpmLockFile;
   }
 
+  console.log(chalk`Removing {green ${lockFile}}...`);
   lockFile = path.join(packageDir, lockFile);
 
   if (fs.existsSync(lockFile)) {
@@ -234,5 +237,6 @@ function refreshPackages(packageManager, packageDir) {
     }
   }
 
+  console.log(chalk`Running {green ${packageManager} install}...`);
   spawn.sync(packageManager, ['install'], { stdio: 'inherit' });
 }
