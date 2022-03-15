@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/sinedied/fuzz-run/compare/2.1.0...2.2.0) (2022-03-15)
+
+
+### Features
+
+* add logs for refresh action ([c41a587](https://github.com/sinedied/fuzz-run/commit/c41a587cbffccb2766716f33eb79979bfe3481f1))
+
 # [2.1.0](https://github.com/sinedied/fuzz-run/compare/2.0.0...2.1.0) (2022-03-01)
 
 
