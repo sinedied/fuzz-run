@@ -19,9 +19,9 @@ const yarnLockFile = 'yarn.lock';
 const pnpmLockFile = 'pnpm-lock.yaml';
 const chalkTemplate = (string_) => chalk(Object.assign([], { raw: [string_] }));
 
-export async function fuzzyRun(args, packageManager = null) {
+export async function fuzzyRun(args, packageManager = undefined) {
   try {
-    const packageFile = findPackageFile(process.cwd());
+    const packageFile = findFileUp(process.cwd(), 'package.json');
     if (!packageFile) {
       throw new Error(chalk`Error, {yellow package.json} not found\n`);
     }
@@ -84,14 +84,14 @@ export async function fuzzyRun(args, packageManager = null) {
   }
 }
 
-function findPackageFile(basePath) {
+function findFileUp(basePath, file) {
   const find = (components) => {
     if (components.length === 0) {
-      return null;
+      return undefined;
     }
 
     const dir = path.join(...components);
-    const packageFile = path.join(dir, 'package.json');
+    const packageFile = path.join(dir, file);
     return fs.existsSync(packageFile)
       ? packageFile
       : find(components.slice(0, -1));
@@ -121,9 +121,9 @@ function getPackageManager(packageDir) {
   }
 
   if (!packageManager) {
-    const hasNpmLock = fs.existsSync(path.join(packageDir, npmLockFile));
-    const hasYarnLock = fs.existsSync(path.join(packageDir, yarnLockFile));
-    const hasPnpmLock = fs.existsSync(path.join(packageDir, pnpmLockFile));
+    const hasNpmLock = findFileUp(packageDir, npmLockFile) !== undefined;
+    const hasYarnLock = findFileUp(packageDir, yarnLockFile) !== undefined;
+    const hasPnpmLock = findFileUp(packageDir, pnpmLockFile) !== undefined;
 
     if (hasPnpmLock && !hasNpmLock && !hasYarnLock) {
       packageManager = 'pnpm';
@@ -142,7 +142,7 @@ function matchScript(string_, scriptNames) {
     limit: 1,
     allowTypo: true
   })[0];
-  return match || null;
+  return match || undefined;
 }
 
 function showScripts(scripts) {
