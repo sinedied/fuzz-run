@@ -7,7 +7,7 @@ function testCli(args, expectedOutput, cwd = 'test') {
     args = args.split(' ');
   
     const result = execSync(`node ${fuzzrun} ${args}`, { encoding: 'utf-8', cwd });
-    const lastLine = result.split(/\\r?\\n/).filter(Boolean).pop();
+    const lastLine = result.split(/\r?\n/).filter(Boolean).pop();
     expect(lastLine).toBe(expectedOutput);
   });
 }
