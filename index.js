@@ -138,10 +138,7 @@ function getPackageManager(packageDir) {
 }
 
 function matchScript(string_, scriptNames) {
-  const match = fuzzysort.go(string_, scriptNames, {
-    limit: 1,
-    allowTypo: true
-  })[0];
+  const match = fuzzysort.go(string_, scriptNames, { limit: 1 })[0];
   return match || undefined;
 }
 
