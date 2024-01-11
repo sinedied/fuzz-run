@@ -44,7 +44,7 @@
   "dependencies": {
     "chalk-template": "^1.1.0",
     "cross-spawn": "^7.0.3",
-    "fuzzysort": "^1.1.4"
+    "fuzzysort": "^2.0.4"
   },
   "devDependencies": {
     "jest": "^29.7.0",
