@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "echo \"test script\""
+    "dev": "echo dev",
+    "start": "echo start",
+    "start:prod": "echo start:prod",
+    "serve": "echo serve",
+    "test:unit": "echo test:unit",
+    "test": "echo test",
+    "build": "echo build",
+    "docker:build": "echo docker:build",
+    "docker:run": "echo docker:run",
+    "export": "echo export"
   },
   "dependencies": {
     "fuzz-run": "^2.1.0"

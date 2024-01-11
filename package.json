@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "xo && cd test && npm i && nr t && nr -r && cd subdir && nr t",
+    "test": "xo && jest",
     "release:check": "semantic-release --dry-run"
   },
   "keywords": [
@@ -47,6 +47,7 @@
     "fuzzysort": "^1.1.4"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "semantic-release": "^22.0.12",
     "semantic-release-npm-github": "^5.0.0",
     "xo": "^0.56.0"
@@ -57,7 +58,10 @@
   },
   "xo": {
     "space": true,
-    "prettier": true
+    "prettier": true,
+    "ignore": [
+      "index.test.js"
+    ]
   },
   "release": {
     "extends": "semantic-release-npm-github",
